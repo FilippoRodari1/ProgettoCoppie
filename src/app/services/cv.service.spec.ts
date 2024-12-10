@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
 import { CvService } from './cv.service';
 
 describe('CvService', () => {
@@ -8,7 +8,6 @@ describe('CvService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // Aggiungi HttpClientTestingModule
       providers: [CvService], // Servizio da testare
     });
     service = TestBed.inject(CvService); // Inietta il servizio

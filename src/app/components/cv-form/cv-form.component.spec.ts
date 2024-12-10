@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { CvFormComponent } from './cv-form.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; 
 
 describe('CvFormComponent', () => {
   let component: CvFormComponent;
@@ -10,7 +9,7 @@ describe('CvFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CvFormComponent],
-      imports: [FormsModule, HttpClientTestingModule],  
+      imports: [FormsModule],  
     }).compileComponents();
   });
 
