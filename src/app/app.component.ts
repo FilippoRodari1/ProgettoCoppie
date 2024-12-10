@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ProgettoCoppie';
+  title = 'Crea il tuo Curriculum';
   cvData = {
     name: 'Mario Rossi',
     email: 'mario.rossi@example.com',

@@ -1,55 +1,19 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request
+from insert import *
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from config import Config
-from services import generate_pdf  # Assicurati che generate_pdf sia un modulo valido
-from models import db, Curriculum  # Assicurati che Curriculum e db siano definiti correttamente
-
 app = Flask(__name__)
-app.config.from_object(Config)
-
-# Inizializza il DB
-db.init_app(app)
-
-# Abilita CORS
-CORS(app)
-
+CORS(app)  # Abilita CORS per tutte le rotta
 @app.route('/api/cv', methods=['POST'])
-def create_cv():
-    try:
-        data = request.json
-        if not data or 'name' not in data or 'email' not in data or 'experience' not in data:
-            return jsonify({'error': 'Invalid data'}), 400
+def process_string():
+    # Recupera la stringa dal corpo della richiesta form
+    input_string = request.form.get('name'),
+    input_email = request.form.get('email'),
+    input_experience = request.form.get('experience'),
 
-        new_cv = Curriculum(name=data['name'], email=data['email'], experience=data['experience'])
-        db.session.add(new_cv)
-        db.session.commit()
-
-        # Genera il PDF
-        pdf_path = generate_pdf(data)  # Assicurati che generate_pdf ritorni un percorso valido
-        return send_file(pdf_path, as_attachment=True)
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
-@app.route('/api/cv', methods=['GET'])
-def get_all_cvs():
-    try:
-        curricula = Curriculum.query.all()
-        return jsonify([{
-            "id": cv.id,
-            "name": cv.name,
-            "email": cv.email,
-            "experience": cv.experience,
-            "created_at": cv.created_at
-        } for cv in curricula])
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
+    if not input_string or not input_email or not input_experience:
+        return jsonify({"error": "Dati mancanti"}), 400
+    insert(input_string,input_email,input_experience)
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()  # Crea tutte le tabelle nel database
-    app.run(debug=True, port=5000)  # Avvia l'app sulla porta 5000
+    app.run(debug=False,host='0.0.0.0',port=5000)

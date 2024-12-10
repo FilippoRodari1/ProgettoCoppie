@@ -31,6 +31,9 @@ describe('CvService', () => {
       experience: '5 anni di esperienza in sviluppo software',
     };
 
+    service.createCv(mockCvData).subscribe(response => {
+      expect(response.message).toBe('Curriculum creato con successo');
+    });
 
     const req = httpMock.expectOne('http://localhost:5000/api/cv'); // Controlla l'URL
     expect(req.request.method).toBe('POST'); // Verifica che sia una richiesta POST

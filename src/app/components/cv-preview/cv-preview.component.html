@@ -1,12 +1,29 @@
-<div *ngIf="cvData" class="cv-preview">
-    <h2>Anteprima del Curriculum</h2>
-    <p><strong>Nome:</strong> {{ cvData.name }}</p>
-    <p><strong>Email:</strong> {{ cvData.email }}</p>
-    <p><strong>Esperienze:</strong></p>
-    <p>{{ cvData.experience }}</p>
+<div *ngIf="cvData" class="cv-preview max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200">
+  <h2 class="text-3xl font-semibold text-center mb-6 text-gray-900">Anteprima del Curriculum</h2>
+
+  <!-- Nome -->
+  <div class="mb-4">
+    <p class="text-lg"><strong class="text-gray-700">Nome:</strong> <span class="text-gray-800">{{ cvData.name }}</span></p>
   </div>
-  
-  <div *ngIf="!cvData">
-    <p>Inserisci i dati per vedere l'anteprima del curriculum.</p>
+
+  <!-- Email -->
+  <div class="mb-4">
+    <p class="text-lg"><strong class="text-gray-700">Email:</strong> <span class="text-gray-800">{{ cvData.email }}</span></p>
   </div>
-  
+
+  <!-- Esperienze -->
+  <div class="mb-4">
+    <p class="text-lg font-semibold text-gray-700">Esperienze:</p>
+    <p class="text-gray-800">{{ cvData.experience }}</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="mt-6 text-center">
+    <p class="text-sm text-gray-500">Generato automaticamente.</p>
+  </div>
+</div>
+
+<!-- Messaggio quando cvData non è disponibile -->
+<div *ngIf="!cvData" class="text-center p-8">
+  <p class="text-xl font-medium text-gray-500">Inserisci i dati per vedere l'anteprima del curriculum.</p>
+</div>
