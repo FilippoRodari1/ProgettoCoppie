@@ -1,12 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CvFormComponent } from './components/cv-form/cv-form.component';
+import { CvPreviewComponent } from './components/cv-preview/cv-preview.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [FormsModule, CvFormComponent, CvPreviewComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'ProgettoCoppie';
+  cvData = {
+    name: 'Mario Rossi',
+    email: 'mario.rossi@example.com',
+    experience: 'Esperienza come sviluppatore Angular.'
+  };
 }

@@ -1,0 +1,12 @@
+<div *ngIf="cvData" class="cv-preview">
+    <h2>Anteprima del Curriculum</h2>
+    <p><strong>Nome:</strong> {{ cvData.name }}</p>
+    <p><strong>Email:</strong> {{ cvData.email }}</p>
+    <p><strong>Esperienze:</strong></p>
+    <p>{{ cvData.experience }}</p>
+  </div>
+  
+  <div *ngIf="!cvData">
+    <p>Inserisci i dati per vedere l'anteprima del curriculum.</p>
+  </div>
+  

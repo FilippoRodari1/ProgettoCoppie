@@ -1,0 +1,58 @@
+<form (ngSubmit)="submitForm()" #cvForm="ngForm" novalidate>
+    <!-- Nome -->
+    <div>
+      <label for="name">Nome:</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="cvData.name"
+        name="name"
+        required
+        #name="ngModel"
+        aria-describedby="nameError"
+      />
+      <!-- Messaggio di errore -->
+      <div *ngIf="name.invalid && name.touched" id="nameError" class="error">
+        Il nome è obbligatorio.
+      </div>
+    </div>
+  
+    <!-- Email -->
+    <div>
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="cvData.email"
+        name="email"
+        required
+        #email="ngModel"
+        aria-describedby="emailError"
+      />
+      <!-- Messaggio di errore -->
+      <div *ngIf="email.invalid && email.touched" id="emailError" class="error">
+        Inserisci un'email valida.
+      </div>
+    </div>
+  
+    <!-- Esperienze -->
+    <div>
+      <label for="experience">Esperienze:</label>
+      <textarea
+        id="experience"
+        [(ngModel)]="cvData.experience"
+        name="experience"
+        required
+        #experience="ngModel"
+        aria-describedby="experienceError"
+      ></textarea>
+      <!-- Messaggio di errore -->
+      <div *ngIf="experience.invalid && experience.touched" id="experienceError" class="error">
+        Le esperienze sono obbligatorie.
+      </div>
+    </div>
+  
+    <!-- Pulsante di invio -->
+    <button type="submit" [disabled]="cvForm.invalid">Genera Curriculum</button>
+  </form>
+  
