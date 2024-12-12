@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CvPreviewComponent } from './cv-preview.component';
+import { CommonModule } from '@angular/common';
 
 describe('CvPreviewComponent', () => {
   let component: CvPreviewComponent;
@@ -7,40 +8,61 @@ describe('CvPreviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CvPreviewComponent]
-    }).compileComponents();
+      declarations: [ CvPreviewComponent ],
+      imports: [CommonModule]  // Importa CommonModule per le direttive come ngIf
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CvPreviewComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges();  // Rende il componente attivo per il rendering iniziale
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render "Anteprima del Curriculum" when cvData is provided', () => {
+  it('should display the name, email, and experience dynamically', () => {
+    // Imposta dei dati di prova per cvData
     component.cvData = {
-      name: 'Mario Rossi',
-      email: 'mario.rossi@example.com',
-      experience: 'Esperienza come sviluppatore.'
+      name: 'Giovanni Rossi',
+      email: 'giovanni.rossi@example.com',
+      experience: 'Esperienza lavorativa in Angular e TypeScript.'
     };
+
+    // Esegui il rilevamento delle modifiche
     fixture.detectChanges();
 
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h2')?.textContent).toContain('Anteprima del Curriculum');
-    expect(compiled.querySelector('p:nth-of-type(1)')?.textContent).toContain('Mario Rossi');
-    expect(compiled.querySelector('p:nth-of-type(2)')?.textContent).toContain('mario.rossi@example.com');
-    expect(compiled.querySelector('p:nth-of-type(4)')?.textContent).toContain('Esperienza come sviluppatore.');
+    // Controlla se i dati sono visibili nel DOM
+    const nameElement: HTMLElement = fixture.nativeElement.querySelector('p');
+    const emailElement: HTMLElement = fixture.nativeElement.querySelectorAll('p')[1]; // Secondo <p> per l'email
+    const experienceElement: HTMLElement = fixture.nativeElement.querySelectorAll('p')[2]; // Terzo <p> per l'esperienza
+
+    expect(nameElement.textContent).toContain('Giovanni Rossi');
+    expect(emailElement.textContent).toContain('giovanni.rossi@example.com');
+    expect(experienceElement.textContent).toContain('Esperienza lavorativa in Angular e TypeScript.');
   });
 
-  it('should render a placeholder message when cvData is null', () => {
-    component.cvData = null;
+  it('should display "Non fornito" if the cvData is empty', () => {
+    // Imposta un cvData vuoto
+    component.cvData = {
+      name: '',
+      email: '',
+      experience: ''
+    };
+
+    // Esegui il rilevamento delle modifiche
     fixture.detectChanges();
 
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('p')?.textContent).toContain('Inserisci i dati per vedere l\'anteprima del curriculum.');
+    // Controlla se vengono mostrati i valori di default
+    const nameElement: HTMLElement = fixture.nativeElement.querySelector('p');
+    const emailElement: HTMLElement = fixture.nativeElement.querySelectorAll('p')[1];
+    const experienceElement: HTMLElement = fixture.nativeElement.querySelectorAll('p')[2];
+
+    expect(nameElement.textContent).toContain('Non fornito');
+    expect(emailElement.textContent).toContain('Non fornito');
+    expect(experienceElement.textContent).toContain('Non fornito');
   });
 });

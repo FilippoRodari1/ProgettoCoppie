@@ -1,36 +1,15 @@
-<div *ngIf="cvData" class="cv-preview max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200" id="cv-content">
-  <h2 class="text-3xl font-semibold text-center mb-6 text-gray-900">Anteprima del Curriculum</h2>
+<div *ngIf="cvData && (cvData.name || cvData.email || cvData.experience)" id="cv-content" class="bg-white shadow-lg rounded-lg p-6 border">
+  <h2 class="text-2xl font-semibold text-gray-800 text-center">CURRICULUM</h2>
 
-  <!-- Nome -->
-  <div class="mb-4">
-    <p class="text-lg"><strong class="text-gray-700">Nome:</strong> <span class="text-gray-800">{{ cvData.name }}</span></p>
-  </div>
-
-  <!-- Email -->
-  <div class="mb-4">
-    <p class="text-lg"><strong class="text-gray-700">Email:</strong> <span class="text-gray-800">{{ cvData.email }}</span></p>
-  </div>
-
-  <!-- Esperienze -->
-  <div class="mb-4">
-    <p class="text-lg font-semibold text-gray-700">Esperienze:</p>
-    <p class="text-gray-800">{{ cvData.experience }}</p>
-  </div>
-
-  <!-- Footer -->
-  <div class="mt-6 text-center">
-    <p class="text-sm text-gray-500">Generato automaticamente.</p>
+  <div class="mt-4">
+    <p *ngIf="cvData.name" class="text-lg"><strong>Nome:</strong> {{ cvData.name }}</p>
+    <p *ngIf="cvData.email" class="text-lg"><strong>Email:</strong> {{ cvData.email }}</p>
+    <p *ngIf="cvData.experience" class="text-lg"><strong>Esperienze:</strong></p>
+    <p *ngIf="cvData.experience" class="text-gray-700">{{ cvData.experience }}</p>
   </div>
 </div>
 
-<!-- Pulsante di stampa -->
-<div class="text-center mt-6">
-  <button (click)="downloadAsPDF()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-    Scarica PDF
-  </button>
+<div *ngIf="!cvData || (!cvData.name && !cvData.email && !cvData.experience)" class="text-center text-gray-500">
+  <p>Inserisci i dati per vedere l'anteprima del curriculum.</p>
 </div>
 
-<!-- Messaggio quando cvData non è disponibile -->
-<div *ngIf="!cvData" class="text-center p-8">
-  <p class="text-xl font-medium text-gray-500">Inserisci i dati per vedere l'anteprima del curriculum.</p>
-</div>

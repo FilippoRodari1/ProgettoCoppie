@@ -8,33 +8,11 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cv-preview',
   templateUrl: './cv-preview.component.html',
   styleUrls: ['./cv-preview.component.css'],
-  imports: [FormsModule, CommonModule]
+  imports: [FormsModule, CommonModule],
+  standalone: true
 
 })
 export class CvPreviewComponent {
   @Input() cvData: { name: string; email: string; experience: string } | null = null;
 
-  downloadAsPDF(): void {
-    const element = document.getElementById('cv-content');
-    if (element) {
-      html2canvas(element).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
-
-        // Calcolo delle dimensioni per l'immagine
-        const imgWidth = 190; // Larghezza in mm
-        const pageHeight = 297; // Altezza della pagina in mm
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        const heightLeft = imgHeight;
-
-        let position = 0;
-
-        // Aggiungi immagine al PDF
-        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-
-        // Salva il PDF
-        pdf.save('curriculum.pdf');
-      });
-    }
-  }
 }
