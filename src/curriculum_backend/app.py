@@ -32,11 +32,18 @@ def invio():
     if not data:
         return jsonify({"message": "Dati non validi"}), 400
 
+    # Estrazione dei dati dal corpo della richiesta
     name = data.get("name")
+    surname = data.get("surname")
     email = data.get("email")
+    phone = data.get("phone")
+    profile = data.get("profile")
+    languages = data.get("languages")
+    license = data.get("license")
+    address = data.get("address")
     experience = data.get("experience")
 
-    if not all([name, email, experience]):
+    if not all([name, surname, email, phone, profile, languages, license, address, experience]):
         return jsonify({"message": "Tutti i campi sono obbligatori"}), 400
 
     connection = create_db_connection()
@@ -45,8 +52,11 @@ def invio():
 
     try:
         cursor = connection.cursor()
-        query = "INSERT INTO `curricula`(`name`, `email`, `experience`) VALUES (%s, %s, %s)"
-        dati = (name, email, experience)
+        query = """
+            INSERT INTO curricula (name, email, experience, surname, phone, profile, languages, license, address)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        dati = (name, surname, email, phone, profile, languages, license, address, experience)
         cursor.execute(query, dati)
         connection.commit()
         return jsonify({"message": "Curriculum inserito con successo"}), 201

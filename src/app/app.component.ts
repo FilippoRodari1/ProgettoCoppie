@@ -13,7 +13,13 @@ export class AppComponent {
   title = 'Crea il tuo Curriculum';
   cvData = {
     name: '',
+    surname: '',
     email: '',
-    experience: ''
+    experience: '',
+    phone: '',
+    profile:'',
+    languages: '',
+    license: '',
+    address: ''
   };
 }

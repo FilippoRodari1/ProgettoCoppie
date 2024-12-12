@@ -1,15 +1,54 @@
-<div *ngIf="cvData && (cvData.name || cvData.email || cvData.experience)" id="cv-content" class="bg-white shadow-lg rounded-lg p-6 border">
-  <h2 class="text-2xl font-semibold text-gray-800 text-center">CURRICULUM</h2>
+<div *ngIf="cvData && (cvData.name || cvData.email || cvData.experience || cvData.surname || cvData.phone || cvData.profile || cvData.languages || cvData.license || cvData.address)" 
+  id="cv-content" class="bg-white shadow-lg rounded-lg p-8 border border-gray-200">
+  
+  <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">RIEPILOGO</h2>
 
-  <div class="mt-4">
+  <!-- Nome e Cognome -->
+  <div *ngIf="cvData.name || cvData.surname" class="mb-4">
     <p *ngIf="cvData.name" class="text-lg"><strong>Nome:</strong> {{ cvData.name }}</p>
-    <p *ngIf="cvData.email" class="text-lg"><strong>Email:</strong> {{ cvData.email }}</p>
-    <p *ngIf="cvData.experience" class="text-lg"><strong>Esperienze:</strong></p>
-    <p *ngIf="cvData.experience" class="text-gray-700">{{ cvData.experience }}</p>
+    <p *ngIf="cvData.surname" class="text-lg"><strong>Cognome:</strong> {{ cvData.surname }}</p>
+  </div>
+
+  <!-- Email -->
+  <div *ngIf="cvData.email" class="mb-4">
+    <p class="text-lg"><strong>Email:</strong> {{ cvData.email }}</p>
+  </div>
+
+  <!-- Telefono -->
+  <div *ngIf="cvData.phone" class="mb-4">
+    <p class="text-lg"><strong>Telefono:</strong> {{ cvData.phone }}</p>
+  </div>
+
+  <!-- Profilo -->
+  <div *ngIf="cvData.profile" class="mb-4">
+    <p class="text-lg"><strong>Profilo:</strong></p>
+    <p class="text-gray-700">{{ cvData.profile }}</p>
+  </div>
+
+  <!-- Lingue -->
+  <div *ngIf="cvData.languages" class="mb-4">
+    <p class="text-lg"><strong>Lingue:</strong> {{ cvData.languages }}</p>
+  </div>
+
+  <!-- Patente -->
+  <div *ngIf="cvData.license" class="mb-4">
+    <p class="text-lg"><strong>Patente:</strong> {{ cvData.license }}</p>
+  </div>
+
+  <!-- Indirizzo -->
+  <div *ngIf="cvData.address" class="mb-4">
+    <p class="text-lg"><strong>Indirizzo:</strong> {{ cvData.address }}</p>
+  </div>
+
+  <!-- Esperienza -->
+  <div *ngIf="cvData.experience" class="mb-4">
+    <p class="text-lg"><strong>Esperienza:</strong></p>
+    <p class="text-gray-700">{{ cvData.experience }}</p>
   </div>
 </div>
 
-<div *ngIf="!cvData || (!cvData.name && !cvData.email && !cvData.experience)" class="text-center text-gray-500">
-  <p>Inserisci i dati per vedere l'anteprima del curriculum.</p>
+<!-- Messaggio quando i dati non sono inseriti -->
+<div *ngIf="!cvData || (!cvData.name && !cvData.email && !cvData.experience && !cvData.surname && !cvData.phone && !cvData.profile && !cvData.languages && !cvData.license && !cvData.address)" 
+  class="text-center text-gray-500">
+  <p class="text-lg">Inserisci i dati per vedere l'anteprima del riepilogo</p>
 </div>
-

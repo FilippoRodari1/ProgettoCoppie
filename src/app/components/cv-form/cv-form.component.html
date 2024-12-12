@@ -23,43 +23,130 @@
           />
         </div>
 
-        <!-- Email -->
+        <!-- Cognome -->
+        <div>
+          <label for="surname" class="block text-lg font-medium text-gray-700">Cognome:</label>
+          <input
+            id="surname"
+            type="text"
+            [(ngModel)]="cvData.surname"
+            name="surname"
+            required
+            #surname="ngModel"
+            class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Inserisci il tuo cognome"
+          />
+        </div>
+
         <div>
           <label for="email" class="block text-lg font-medium text-gray-700">Email:</label>
           <input
             id="email"
-            type="email"
+            type="text"
             [(ngModel)]="cvData.email"
             name="email"
             required
-            #email="ngModel"
+            #phone="ngModel"
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Inserisci la tua email"
+            placeholder="inserisci la tua email"
+          />
+        </div>
+    
+        <!-- Telefono -->
+        <div>
+          <label for="phone" class="block text-lg font-medium text-gray-700">Telefono:</label>
+          <input
+            id="phone"
+            type="text"
+            [(ngModel)]="cvData.phone"
+            name="phone"
+            required
+            #phone="ngModel"
+            class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Inserisci il tuo numero di telefono"
           />
         </div>
 
-        <!-- Esperienze -->
+        <!-- Profilo -->
         <div>
-          <label for="experience" class="block text-lg font-medium text-gray-700">Esperienze:</label>
+          <label for="profile" class="block text-lg font-medium text-gray-700">Profilo:</label>
           <textarea
+            id="profile"
+            [(ngModel)]="cvData.profile"
+            name="profile"
+            required
+            #profile="ngModel"
+            class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="5"
+            placeholder="Descrivi il tuo profilo professionale"
+          ></textarea>
+        </div>
+
+        <!-- Lingue -->
+        <div>
+          <label for="languages" class="block text-lg font-medium text-gray-700">Lingue conosciute:</label>
+          <input
+            id="languages"
+            type="text"
+            [(ngModel)]="cvData.languages"
+            name="languages"
+            required
+            #languages="ngModel"
+            class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Lingue che conosci"
+          />
+        </div>
+
+        <div>
+          <label for="experience" class="block text-lg font-medium text-gray-700">Experience:</label>
+          <input
             id="experience"
+            type="text"
             [(ngModel)]="cvData.experience"
             name="experience"
             required
-            #experience="ngModel"
+            #phone="ngModel"
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="5"
-            placeholder="Descrivi le tue esperienze"
-          ></textarea>
+            placeholder="Scrivi le tue esperienze lavorative!"
+          />
+        </div>
+
+        <!-- Patente -->
+        <div>
+          <label for="license" class="block text-lg font-medium text-gray-700">Patente:</label>
+          <input
+            id="license"
+            type="text"
+            [(ngModel)]="cvData.license"
+            name="license"
+            required
+            #license="ngModel"
+            class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Tipo di patente"
+          />
+        </div>
+
+        <!-- Indirizzo -->
+        <div>
+          <label for="address" class="block text-lg font-medium text-gray-700">Indirizzo:</label>
+          <input
+            id="address"
+            type="text"
+            [(ngModel)]="cvData.address"
+            name="address"
+            required
+            #address="ngModel"
+            class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Inserisci il tuo indirizzo"
+          />
         </div>
 
         <!-- Pulsante di invio -->
         <div class="text-center">
-          <button 
+          <button
             (click)="downloadAsPDF()"
             type="submit"
             [disabled]="cvForm.invalid"
-            
             class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all ease-in-out"
           >
             Genera Curriculum

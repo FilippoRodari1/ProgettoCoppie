@@ -13,6 +13,17 @@ import { CommonModule } from '@angular/common';
 
 })
 export class CvPreviewComponent {
-  @Input() cvData: { name: string; email: string; experience: string } | null = null;
-
+    @Input() cvData: {
+      name: string;
+      surname: string;
+      email: string;
+      experience: string;
+      phone: string;
+      profile: string;
+      languages: string;
+      license: string;
+      address: string;
+    } | null = null;
+ 
 }
+

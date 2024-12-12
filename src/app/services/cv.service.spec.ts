@@ -23,11 +23,17 @@ describe('CvService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should send a POST request to create a CV', () => {
+  it('should send a POST request to create a CV with all fields', () => {
     const mockCvData = {
-      name: 'Mario Rossi',
+      name: 'Mario',
+      surname: 'Rossi',
       email: 'mario.rossi@example.com',
       experience: '5 anni di esperienza in sviluppo software',
+      phone: '1234567890',
+      profile: 'Sviluppatore full-stack con esperienza in Angular e Node.js.',
+      languages: 'Italiano, Inglese',
+      license: 'Patente B',
+      address: 'Via Roma 123, Milano'
     };
 
     service.createCv(mockCvData).subscribe(response => {
@@ -36,22 +42,36 @@ describe('CvService', () => {
 
     const req = httpMock.expectOne('http://localhost:5000/api/cv'); // Controlla l'URL
     expect(req.request.method).toBe('POST'); // Verifica che sia una richiesta POST
-    expect(req.request.body).toEqual(mockCvData); // Verifica che i dati siano corretti
+    expect(req.request.body).toEqual({
+      ...mockCvData,
+    }); // Verifica che i dati siano corretti
     req.flush({ message: 'Curriculum creato con successo' }); // Mock della risposta
   });
 
   it('should fetch all CVs via GET request', () => {
     const mockCvs = [
       {
-        name: 'Mario Rossi',
+        name: 'Mario',
+        surname: 'Rossi',
         email: 'mario.rossi@example.com',
         experience: '5 anni di esperienza in sviluppo software',
+        phone: '1234567890',
+        profile: 'Sviluppatore full-stack con esperienza in Angular e Node.js.',
+        languages: 'Italiano, Inglese',
+        license: 'Patente B',
+        address: 'Via Roma 123, Milano'
       },
       {
-        name: 'Giulia Bianchi',
+        name: 'Giulia',
+        surname: 'Bianchi',
         email: 'giulia.bianchi@example.com',
         experience: '2 anni di esperienza come progettista UX',
-      },
+        phone: '0987654321',
+        profile: 'Progettista UX con esperienza in user research e design.',
+        languages: 'Italiano, Inglese, Francese',
+        license: 'Patente A',
+        address: 'Via Milano 45, Torino'
+      }
     ];
 
     service.getAllCvs().subscribe(cvs => {

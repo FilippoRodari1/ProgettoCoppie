@@ -4,9 +4,15 @@ import { Observable } from 'rxjs';
 
 // Interfaccia per definire la struttura dei dati del CV
 export interface CvData {
-  name: string;
-  email: string;
-  experience: string;
+      name: string;
+      surname: string;
+      email: string;
+      experience: string;
+      phone: string;
+      profile: string;
+      languages: string;
+      license: string;
+      address: string;
 }
 
 @Injectable({
