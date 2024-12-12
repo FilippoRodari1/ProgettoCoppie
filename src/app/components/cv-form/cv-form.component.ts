@@ -43,18 +43,30 @@ export class CvFormComponent {
 
   downloadAsPDF() {
     const doc = new jsPDF();
+    const marginLeft = 20; // Margine sinistro
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const marginRight = pageWidth - marginLeft; // Margine destro
+  
+    let yOffset = 20; // Posizione iniziale per il contenuto
   
     // Titolo del Curriculum
     doc.setFontSize(24);
     doc.setFont("helvetica", "bold");
-    doc.text('Curriculum Vitae', 105, 20, { align: 'center' });
+    doc.text('Curriculum Vitae', pageWidth / 2, yOffset, { align: 'center' });
   
     // Linea separatrice
+    yOffset += 10;
     doc.setLineWidth(0.5);
-    doc.line(20, 30, 190, 30);
+    doc.line(marginLeft, yOffset, marginRight, yOffset);
   
-    // Dati personali
-    doc.setFontSize(14);
+    // Sezione Dati personali
+    yOffset += 10;
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "bold");
+    doc.text('Dati Personali', marginLeft, yOffset);
+  
+    yOffset += 8;
+    doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
     const personalData = [
       `Nome: ${this.cvData.name} ${this.cvData.surname}`,
@@ -64,61 +76,71 @@ export class CvFormComponent {
       `Patente: ${this.cvData.license}`,
       `Indirizzo: ${this.cvData.address}`,
     ];
-
-     // Linea separatrice
-     doc.setLineWidth(0.5);
-     doc.line(20, 30, 190, 30);
   
-    let yOffset = 50; // Posizione iniziale per i dati personali
     personalData.forEach((line) => {
-      doc.text(line, 20, yOffset);
-      yOffset += 10;
+      doc.text(line, marginLeft, yOffset);
+      yOffset += 8;
     });
+  
+    // Linea separatrice
+    yOffset += 5;
+    doc.setLineWidth(0.3);
+    doc.line(marginLeft, yOffset, marginRight, yOffset);
   
     // Sezione Profilo
     if (this.cvData.profile) {
+      yOffset += 10;
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
-      doc.text('Profilo', 20, yOffset + 10);
+      doc.text('Profilo', marginLeft, yOffset);
   
+      yOffset += 8;
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
       const profileText = this.cvData.profile.split("\n");
-      yOffset += 20;
       profileText.forEach((line) => {
-        doc.text(line, 20, yOffset);
-        yOffset += 10;
+        doc.text(line, marginLeft, yOffset);
+        yOffset += 8;
       });
+  
+      // Linea separatrice
+      yOffset += 5;
+      doc.setLineWidth(0.3);
+      doc.line(marginLeft, yOffset, marginRight, yOffset);
     }
-
-     // Linea separatrice
-     doc.setLineWidth(0.5);
-     doc.line(20, 30, 190, 30);
   
     // Sezione Esperienze Professionali
     if (this.cvData.experience) {
+      yOffset += 10;
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
-      doc.text('Esperienze Professionali', 20, yOffset + 10);
+      doc.text('Esperienze Professionali', marginLeft, yOffset);
   
+      yOffset += 8;
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
       const experienceText = this.cvData.experience.split("\n");
-      yOffset += 20;
       experienceText.forEach((line) => {
-        doc.text(line, 20, yOffset);
-        yOffset += 10;
+        doc.text(line, marginLeft, yOffset);
+        yOffset += 8;
       });
+  
+      // Linea separatrice
+      yOffset += 5;
+      doc.setLineWidth(0.3);
+      doc.line(marginLeft, yOffset, marginRight, yOffset);
     }
   
     // Footer
+    yOffset += 20;
     doc.setFontSize(10);
     doc.setFont("helvetica", "italic");
-    doc.text("Curriculum generato automaticamente", 105, yOffset + 20, { align: 'center' });
+    doc.text("Curriculum generato automaticamente", pageWidth / 2, yOffset, { align: 'center' });
   
     // Salva il documento come PDF
     doc.save('curriculum.pdf');
   }
+  
   
   
 }
