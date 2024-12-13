@@ -4,7 +4,7 @@ import mysql.connector
 from mysql.connector import Error
 
 app = Flask(__name__)
-CORS(app)  # Abilita CORS
+CORS(app)
 
 # Configurazione Database
 DB_CONFIG = {
@@ -32,18 +32,8 @@ def invio():
     if not data:
         return jsonify({"message": "Dati non validi"}), 400
 
-    # Estrazione dei dati dal corpo della richiesta
-    name = data.get("name")
-    surname = data.get("surname")
-    email = data.get("email")
-    phone = data.get("phone")
-    profile = data.get("profile")
-    languages = data.get("languages")
-    license = data.get("license")
-    address = data.get("address")
-    experience = data.get("experience")
-
-    if not all([name, surname, email, phone, profile, languages, license, address, experience]):
+    required_fields = ["name", "surname", "email", "phone", "profile", "languages", "license", "address", "experience"]
+    if not all(field in data for field in required_fields):
         return jsonify({"message": "Tutti i campi sono obbligatori"}), 400
 
     connection = create_db_connection()
@@ -53,11 +43,10 @@ def invio():
     try:
         cursor = connection.cursor()
         query = """
-            INSERT INTO curricula (name, email, experience, surname, phone, profile, languages, license, address)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO curricula (name, surname, email, phone, profile, languages, license, address, experience, created_at)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
         """
-        dati = (name, surname, email, phone, profile, languages, license, address, experience)
-        cursor.execute(query, dati)
+        cursor.execute(query, tuple(data[field] for field in required_fields))
         connection.commit()
         return jsonify({"message": "Curriculum inserito con successo"}), 201
     except Error as err:
@@ -68,6 +57,34 @@ def invio():
             cursor.close()
         if connection:
             connection.close()
+
+@app.get("/api/cv/latest")
+def get_curricula():
+    print("Recupero l'ultimo curriculum...")
+    connection = create_db_connection()
+    if connection is None:
+        return jsonify({"message": "Errore di connessione al database"}), 500
+
+    try:
+        cursor = connection.cursor(dictionary=True)
+        query = "SELECT * FROM curricula ORDER BY created_at DESC LIMIT 1"
+        print("Eseguendo la query:", query)
+        cursor.execute(query)
+        result = cursor.fetchone()  # Usa fetchone per ottenere un solo risultato
+        print("Risultato ottenuto:", result)
+        if result:
+            return jsonify(result), 200
+        else:
+            return jsonify({"message": "Nessun curriculum trovato"}), 404
+    except Error as err:
+        print(f"Errore durante il recupero: {err}")
+        return jsonify({"message": "Errore durante il recupero dei dati"}), 500
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if connection:
+            connection.close()
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

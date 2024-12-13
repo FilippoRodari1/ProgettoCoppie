@@ -4,15 +4,15 @@ import { Observable } from 'rxjs';
 
 // Interfaccia per definire la struttura dei dati del CV
 export interface CvData {
-      name: string;
-      surname: string;
-      email: string;
-      experience: string;
-      phone: string;
-      profile: string;
-      languages: string;
-      license: string;
-      address: string;
+  name: string;
+  surname: string;
+  email: string;
+  experience: string;
+  phone: string;
+  profile: string;
+  languages: string;
+  license: string;
+  address: string;
 }
 
 @Injectable({
@@ -34,5 +34,10 @@ export class CvService {
   getAllCvs(): Observable<CvData[]> {
     return this.http.get<CvData[]>(this.apiUrl);
   }
-}
 
+  // Funzione per ottenere l'ultimo CV
+  getLatestCv(): Observable<CvData> {
+    const latestCvUrl = `${this.apiUrl}/latest`;  
+    return this.http.get<CvData>(latestCvUrl);
+  }
+}

@@ -1,54 +1,54 @@
 <div *ngIf="cvData && (cvData.name || cvData.email || cvData.experience || cvData.surname || cvData.phone || cvData.profile || cvData.languages || cvData.license || cvData.address)" 
-  id="cv-content" class="bg-white shadow-lg rounded-lg p-8 border border-gray-200">
+  id="cv-content" class="bg-gradient-to-r from-indigo-500 to-blue-600 shadow-xl rounded-lg p-8 border border-gray-200 transform transition-all hover:scale-105">
   
-  <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">RIEPILOGO</h2>
+  <h2 class="text-4xl font-extrabold text-white text-center mb-6 drop-shadow-md">RIEPILOGO DEL CURRICULUM</h2>
 
   <!-- Nome e Cognome -->
-  <div *ngIf="cvData.name || cvData.surname" class="mb-4">
-    <p *ngIf="cvData.name" class="text-lg"><strong>Nome:</strong> {{ cvData.name }}</p>
-    <p *ngIf="cvData.surname" class="text-lg"><strong>Cognome:</strong> {{ cvData.surname }}</p>
+  <div *ngIf="cvData.name || cvData.surname" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p *ngIf="cvData.name" class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Nome:</strong> {{ cvData.name }}</p>
+    <p *ngIf="cvData.surname" class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Cognome:</strong> {{ cvData.surname }}</p>
   </div>
 
   <!-- Email -->
-  <div *ngIf="cvData.email" class="mb-4">
-    <p class="text-lg"><strong>Email:</strong> {{ cvData.email }}</p>
+  <div *ngIf="cvData.email" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Email:</strong> {{ cvData.email }}</p>
   </div>
 
   <!-- Telefono -->
-  <div *ngIf="cvData.phone" class="mb-4">
-    <p class="text-lg"><strong>Telefono:</strong> {{ cvData.phone }}</p>
+  <div *ngIf="cvData.phone" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Telefono:</strong> {{ cvData.phone }}</p>
   </div>
 
   <!-- Profilo -->
-  <div *ngIf="cvData.profile" class="mb-4">
-    <p class="text-lg"><strong>Profilo:</strong></p>
-    <p class="text-gray-700">{{ cvData.profile }}</p>
+  <div *ngIf="cvData.profile" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Profilo:</strong></p>
+    <p class="text-gray-700 italic">{{ cvData.profile }}</p>
   </div>
 
   <!-- Lingue -->
-  <div *ngIf="cvData.languages" class="mb-4">
-    <p class="text-lg"><strong>Lingue:</strong> {{ cvData.languages }}</p>
+  <div *ngIf="cvData.languages" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Lingue:</strong> {{ cvData.languages }}</p>
   </div>
 
   <!-- Patente -->
-  <div *ngIf="cvData.license" class="mb-4">
-    <p class="text-lg"><strong>Patente:</strong> {{ cvData.license }}</p>
+  <div *ngIf="cvData.license" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Patente:</strong> {{ cvData.license }}</p>
   </div>
 
   <!-- Indirizzo -->
-  <div *ngIf="cvData.address" class="mb-4">
-    <p class="text-lg"><strong>Indirizzo:</strong> {{ cvData.address }}</p>
+  <div *ngIf="cvData.address" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Indirizzo:</strong> {{ cvData.address }}</p>
   </div>
 
   <!-- Esperienza -->
-  <div *ngIf="cvData.experience" class="mb-4">
-    <p class="text-lg"><strong>Esperienza:</strong></p>
-    <p class="text-gray-700">{{ cvData.experience }}</p>
+  <div *ngIf="cvData.experience" class="mb-6 bg-white p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+    <p class="text-xl text-gray-800 font-medium"><strong class="text-blue-600">Esperienza:</strong></p>
+    <p class="text-gray-700 italic">{{ cvData.experience }}</p>
   </div>
 </div>
 
 <!-- Messaggio quando i dati non sono inseriti -->
 <div *ngIf="!cvData || (!cvData.name && !cvData.email && !cvData.experience && !cvData.surname && !cvData.phone && !cvData.profile && !cvData.languages && !cvData.license && !cvData.address)" 
-  class="text-center text-gray-500">
-  <p class="text-lg">Inserisci i dati per vedere l'anteprima del riepilogo</p>
+  class="text-center text-gray-500 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 p-6 rounded-lg shadow-lg transform transition-all hover:scale-105">
+  <p class="text-lg font-semibold text-white">Inserisci i dati per vedere l'anteprima del riepilogo</p>
 </div>

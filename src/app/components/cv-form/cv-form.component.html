@@ -20,7 +20,15 @@
             #name="ngModel"
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Inserisci il tuo nome"
+            [ngClass]="{'border-red-500': name.invalid && name.touched, 'border-green-500': name.valid && name.touched}"
           />
+          <!-- Icona di check -->
+          <div *ngIf="name.valid && name.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
+          <div *ngIf="name.invalid && name.touched" class="text-red-500 text-sm">
+            Nome è obbligatorio.
+          </div>
         </div>
 
         <!-- Cognome -->
@@ -35,36 +43,66 @@
             #surname="ngModel"
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Inserisci il tuo cognome"
+            [ngClass]="{'border-red-500': surname.invalid && surname.touched, 'border-green-500': surname.valid && surname.touched}"
           />
+          <!-- Icona di check -->
+          <div *ngIf="surname.valid && surname.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
+          <div *ngIf="surname.invalid && surname.touched" class="text-red-500 text-sm">
+            Cognome è obbligatorio.
+          </div>
         </div>
 
+        <!-- Email -->
         <div>
           <label for="email" class="block text-lg font-medium text-gray-700">Email:</label>
           <input
             id="email"
-            type="text"
+            type="email"
             [(ngModel)]="cvData.email"
             name="email"
             required
-            #phone="ngModel"
+            #email="ngModel"
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="inserisci la tua email"
+            placeholder="Inserisci la tua email"
+            [ngClass]="{
+              'border-red-500': email.invalid && email.touched,
+              'border-green-500': email.valid && email.touched
+            }"
+            [pattern]="'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'"
           />
+          <!-- Icona di check -->
+          <div *ngIf="email.valid && email.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
+          <div *ngIf="email.invalid && email.touched" class="text-red-500 text-sm">
+            Inserisci una email valida.
+          </div>
         </div>
-    
+
         <!-- Telefono -->
         <div>
           <label for="phone" class="block text-lg font-medium text-gray-700">Telefono:</label>
           <input
             id="phone"
-            type="text"
+            type="number"
             [(ngModel)]="cvData.phone"
             name="phone"
             required
             #phone="ngModel"
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Inserisci il tuo numero di telefono"
+            pattern="^[0-9]{10,15}$"
+            [ngClass]="{'border-red-500': phone.invalid && phone.touched, 'border-green-500': phone.valid && phone.touched}"
           />
+          <!-- Icona di check -->
+          <div *ngIf="phone.valid && phone.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
+          <div *ngIf="phone.invalid && phone.touched" class="text-red-500 text-sm">
+            Inserisci un numero di telefono valido (solo numeri).
+          </div>
         </div>
 
         <!-- Profilo -->
@@ -80,6 +118,13 @@
             rows="5"
             placeholder="Descrivi il tuo profilo professionale"
           ></textarea>
+          <!-- Icona di check -->
+          <div *ngIf="profile.valid && profile.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
+          <div *ngIf="profile.invalid && profile.touched" class="text-red-500 text-sm">
+            Profilo è obbligatorio.
+          </div>
         </div>
 
         <!-- Lingue -->
@@ -95,20 +140,30 @@
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Lingue che conosci"
           />
+          <!-- Icona di check -->
+          <div *ngIf="languages.valid && languages.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
         </div>
 
+        <!-- Esperienze -->
         <div>
-          <label for="experience" class="block text-lg font-medium text-gray-700">Experience:</label>
-          <input
+          <label for="experience" class="block text-lg font-medium text-gray-700">Esperienze:</label>
+          <textarea
             id="experience"
             type="text"
             [(ngModel)]="cvData.experience"
             name="experience"
             required
-            #phone="ngModel"
+            #experience="ngModel"
+            rows="5"
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Scrivi le tue esperienze lavorative!"
-          />
+          ></textarea>
+          <!-- Icona di check -->
+          <div *ngIf="experience.valid && experience.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
         </div>
 
         <!-- Patente -->
@@ -124,6 +179,10 @@
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Tipo di patente"
           />
+          <!-- Icona di check -->
+          <div *ngIf="license.valid && license.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
         </div>
 
         <!-- Indirizzo -->
@@ -139,12 +198,15 @@
             class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Inserisci il tuo indirizzo"
           />
+          <!-- Icona di check -->
+          <div *ngIf="address.valid && address.touched" class="valid-icon text-green-500">
+            ✔️
+          </div>
         </div>
 
         <!-- Pulsante di invio -->
         <div class="text-center">
           <button
-            (click)="downloadAsPDF()"
             type="submit"
             [disabled]="cvForm.invalid"
             class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all ease-in-out"

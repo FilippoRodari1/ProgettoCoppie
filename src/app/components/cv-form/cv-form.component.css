@@ -1,0 +1,139 @@
+/* Aggiungi transizioni per una modifica del bordo */
+input, textarea {
+    transition: all 0.3s ease;
+  }
+  
+  /* Aggiungi il focus e l'errore */
+  input:focus, textarea:focus {
+    border-color: #3b82f6; /* Colore del bordo in focus */
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); /* Ombra leggera al focus */
+  }
+  
+  /* Stato valido per i campi */
+  input.ng-valid, textarea.ng-valid {
+    border-color: #34d399; /* Colore verde quando il campo è valido */
+    animation: validInput 0.5s ease-in-out; /* Animazione quando il campo è valido */
+  }
+  
+  @keyframes validInput {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+  }
+  
+  /* Stato invalido per i campi */
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border-color: #f87171; /* Colore rosso per errori */
+    animation: shake 0.5s ease; /* Animazione di shake quando il campo è invalido */
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Animazione di "check" quando il campo è valido */
+  input.ng-valid.ng-touched + .valid-icon, textarea.ng-valid.ng-touched + .valid-icon {
+    opacity: 1;
+    transform: scale(1);
+    animation: checkIcon 0.5s ease-in-out;
+  }
+  
+  @keyframes checkIcon {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Nascondi l'icona di "check" di default */
+  .valid-icon {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+  }
+
+  /* Pulsante stilizzato */
+button:disabled {
+    background-color: #d1d5db; /* Grigio chiaro quando disabilitato */
+    cursor: not-allowed;
+  }
+  
+  button {
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #2563eb; /* Colore blu al passaggio del mouse */
+  }
+  
+  textarea {
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  /* Textarea focus */
+  textarea:focus {
+    border-color: #2563eb; /* Colore blu al focus */
+  }
+  
+  /* Aggiungi ombreggiature leggere per migliorare il design */
+  textarea, button {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  ul {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
+  /* Estetica dell'icona di check */
+  .text-green-500 {
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+  
+  .text-gray-700 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  /* Effetto hover sui punti dell'elenco */
+  li:hover {
+    background-color: #f1f5f9;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+  
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .space-x-2 {
+    margin-right: 8px;
+  }
+  
+  

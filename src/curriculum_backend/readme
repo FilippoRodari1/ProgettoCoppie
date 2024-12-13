@@ -1,0 +1,3 @@
+Per avviare il server: entrare nella pagina di app.py e procedere inserendo i comandi fn + f5 dovrebbe partire un run and debugger (se non funziona con fn+f5 andare in run and debug)
+Per capire che il server è partito deve comparire in alto centrale nello schermo un rettangolo nero e nella cli la conferma del server attivo
+
